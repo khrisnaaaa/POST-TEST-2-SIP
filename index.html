@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/BatasAdminBatasadmin_1.js"></script>
+        <script src="data/Akses_Clipped_2.js"></script>
+        <script src="data/Bangunan_Intersect_3.js"></script>
+        <script src="data/JaringanJalan_4.js"></script>
+        <script src="data/Halte_fixHalte_5.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-7.346821314651665,112.73871702964068],[-7.222922046026596,112.89510525016205]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        function pop_BatasAdminBatasadmin_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>WADMKC</strong><br />' + (feature.properties['WADMKC'] !== null ? autolinker.link(feature.properties['WADMKC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luas</th>\
+                        <td>' + (feature.properties['Luas Kecamatan'] !== null ? autolinker.link(feature.properties['Luas Kecamatan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BatasAdminBatasadmin_1_0(feature) {
+            switch(String(feature.properties['WADMKC'])) {
+                case 'Kecamatan Mulyorejo':
+                    return {
+                pane: 'pane_BatasAdminBatasadmin_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,162,162,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kecamatan Sukolilo':
+                    return {
+                pane: 'pane_BatasAdminBatasadmin_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,202,202,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_BatasAdminBatasadmin_1');
+        map.getPane('pane_BatasAdminBatasadmin_1').style.zIndex = 401;
+        map.getPane('pane_BatasAdminBatasadmin_1').style['mix-blend-mode'] = 'normal';
+        var layer_BatasAdminBatasadmin_1 = new L.geoJson(json_BatasAdminBatasadmin_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BatasAdminBatasadmin_1',
+            layerName: 'layer_BatasAdminBatasadmin_1',
+            pane: 'pane_BatasAdminBatasadmin_1',
+            onEachFeature: pop_BatasAdminBatasadmin_1,
+            style: style_BatasAdminBatasadmin_1_0,
+        });
+        bounds_group.addLayer(layer_BatasAdminBatasadmin_1);
+        map.addLayer(layer_BatasAdminBatasadmin_1);
+        function pop_Akses_Clipped_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Keterjangkauan Area</th>\
+                        <td>' + (feature.properties['Keterangan'] !== null ? autolinker.link(feature.properties['Keterangan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Akses_Clipped_2_0(feature) {
+            switch(String(feature.properties['Keterangan'])) {
+                case '400':
+                    return {
+                pane: 'pane_Akses_Clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '800':
+                    return {
+                pane: 'pane_Akses_Clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,232,173,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1200':
+                    return {
+                pane: 'pane_Akses_Clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,201,128,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Akses_Clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Akses_Clipped_2');
+        map.getPane('pane_Akses_Clipped_2').style.zIndex = 402;
+        map.getPane('pane_Akses_Clipped_2').style['mix-blend-mode'] = 'normal';
+        var layer_Akses_Clipped_2 = new L.geoJson(json_Akses_Clipped_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Akses_Clipped_2',
+            layerName: 'layer_Akses_Clipped_2',
+            pane: 'pane_Akses_Clipped_2',
+            onEachFeature: pop_Akses_Clipped_2,
+            style: style_Akses_Clipped_2_0,
+        });
+        bounds_group.addLayer(layer_Akses_Clipped_2);
+        map.addLayer(layer_Akses_Clipped_2);
+        function pop_Bangunan_Intersect_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Keterjangkauan Bangunan</th>\
+                        <td>' + (feature.properties['Keterangan'] !== null ? autolinker.link(feature.properties['Keterangan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Bangunan_Intersect_3_0(feature) {
+            switch(String(feature.properties['Keterangan'])) {
+                case '400':
+                    return {
+                pane: 'pane_Bangunan_Intersect_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,253,191,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '800':
+                    return {
+                pane: 'pane_Bangunan_Intersect_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(241,96,93,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1200':
+                    return {
+                pane: 'pane_Bangunan_Intersect_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,31,129,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Bangunan_Intersect_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,4,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Bangunan_Intersect_3');
+        map.getPane('pane_Bangunan_Intersect_3').style.zIndex = 403;
+        map.getPane('pane_Bangunan_Intersect_3').style['mix-blend-mode'] = 'normal';
+        var layer_Bangunan_Intersect_3 = new L.geoJson(json_Bangunan_Intersect_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Bangunan_Intersect_3',
+            layerName: 'layer_Bangunan_Intersect_3',
+            pane: 'pane_Bangunan_Intersect_3',
+            onEachFeature: pop_Bangunan_Intersect_3,
+            style: style_Bangunan_Intersect_3_0,
+        });
+        bounds_group.addLayer(layer_Bangunan_Intersect_3);
+        map.addLayer(layer_Bangunan_Intersect_3);
+        function pop_JaringanJalan_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['osm_id'] !== null ? autolinker.link(feature.properties['osm_id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['bridge'] !== null ? autolinker.link(feature.properties['bridge'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tunnel'] !== null ? autolinker.link(feature.properties['tunnel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['width'] !== null ? autolinker.link(feature.properties['width'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['highway'] !== null ? autolinker.link(feature.properties['highway'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['surface'] !== null ? autolinker.link(feature.properties['surface'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['railway'] !== null ? autolinker.link(feature.properties['railway'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['layer'] !== null ? autolinker.link(feature.properties['layer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['oneway'] !== null ? autolinker.link(feature.properties['oneway'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['smoothness'] !== null ? autolinker.link(feature.properties['smoothness'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_JaringanJalan_4_0() {
+            return {
+                pane: 'pane_JaringanJalan_4',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JaringanJalan_4');
+        map.getPane('pane_JaringanJalan_4').style.zIndex = 404;
+        map.getPane('pane_JaringanJalan_4').style['mix-blend-mode'] = 'normal';
+        var layer_JaringanJalan_4 = new L.geoJson(json_JaringanJalan_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JaringanJalan_4',
+            layerName: 'layer_JaringanJalan_4',
+            pane: 'pane_JaringanJalan_4',
+            onEachFeature: pop_JaringanJalan_4,
+            style: style_JaringanJalan_4_0,
+        });
+        bounds_group.addLayer(layer_JaringanJalan_4);
+        map.addLayer(layer_JaringanJalan_4);
+        function pop_Halte_fixHalte_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Nama Halte</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Koridor</strong><br />' + (feature.properties['Desc_Koridor'] !== null ? autolinker.link(feature.properties['Desc_Koridor'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Jenis Halte</strong><br />' + (feature.properties['Desc_Jenis'] !== null ? autolinker.link(feature.properties['Desc_Jenis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Layanan</strong><br />' + (feature.properties['Desc_Layanan'] !== null ? autolinker.link(feature.properties['Desc_Layanan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Provider</strong><br />' + (feature.properties['Desc_Provider'] !== null ? autolinker.link(feature.properties['Desc_Provider'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Halte_fixHalte_5_0(feature) {
+            switch(String(feature.properties['Name'])) {
+                case 'Halte Bundaran ITS Trans Semanggi':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(109,211,31,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Galaxy 1':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(81,160,228,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Galaxy 2':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(124,220,148,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Gramedia Manyar':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,211,225,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte ITATS':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(226,70,119,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte ITS':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(129,115,203,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Kalijudan 1':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(58,64,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Kalijudan 2':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,116,229,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Kejawan Putih':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(184,94,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Kertajaya Indah':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(157,123,229,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Klampis':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(27,220,210,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte KONI Jatim':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,239,35,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte KONI MERR':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(14,153,208,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Kopertis':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(221,69,92,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Manyar Kertoadi (Halte Kertajaya Indah 2)':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(40,219,177,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Mulyorejo':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,82,79,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Mulyorejo 2':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(220,130,190,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Park and Ride Arief Rahman Hakim':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,50,141,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte PENS':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,218,91,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte PENS 1':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(216,180,97,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte RS Haji 1':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,189,17,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte RS Haji 2':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,82,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte RSIA 1':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,150,73,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte RSIA 2':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,215,121,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Samsat Manyar Kertoarjo':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(60,221,42,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Semampir':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(163,207,93,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Semolowaru 1':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,240,166,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Semolowaru 2':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,36,231,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Sentra UKM Merr':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(208,136,118,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte SMPN 19':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,113,214,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Superindo':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(105,212,167,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Unair 1':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(92,144,233,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Unair 2':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,117,66,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Halte Universitas Katolik Darma Cendika':
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,240,120,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Halte_fixHalte_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(126,52,205,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Halte_fixHalte_5');
+        map.getPane('pane_Halte_fixHalte_5').style.zIndex = 405;
+        map.getPane('pane_Halte_fixHalte_5').style['mix-blend-mode'] = 'normal';
+        var layer_Halte_fixHalte_5 = new L.geoJson(json_Halte_fixHalte_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Halte_fixHalte_5',
+            layerName: 'layer_Halte_fixHalte_5',
+            pane: 'pane_Halte_fixHalte_5',
+            onEachFeature: pop_Halte_fixHalte_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Halte_fixHalte_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Halte_fixHalte_5);
+        map.addLayer(layer_Halte_fixHalte_5);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Halte_fix — Halte<br /><table><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteBundaranITSTransSemanggi0.png" /></td><td>Halte Bundaran ITS Trans Semanggi</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteGalaxy11.png" /></td><td>Halte Galaxy 1</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteGalaxy22.png" /></td><td>Halte Galaxy 2</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteGramediaManyar3.png" /></td><td>Halte Gramedia Manyar</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteITATS4.png" /></td><td>Halte ITATS</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteITS5.png" /></td><td>Halte ITS</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteKalijudan16.png" /></td><td>Halte Kalijudan 1</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteKalijudan27.png" /></td><td>Halte Kalijudan 2</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteKejawanPutih8.png" /></td><td>Halte Kejawan Putih</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteKertajayaIndah9.png" /></td><td>Halte Kertajaya Indah</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteKlampis10.png" /></td><td>Halte Klampis</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteKONIJatim11.png" /></td><td>Halte KONI Jatim</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteKONIMERR12.png" /></td><td>Halte KONI MERR</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteKopertis13.png" /></td><td>Halte Kopertis</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteManyarKertoadiHalteKertajayaIndah214.png" /></td><td>Halte Manyar Kertoadi (Halte Kertajaya Indah 2)</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteMulyorejo15.png" /></td><td>Halte Mulyorejo</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteMulyorejo216.png" /></td><td>Halte Mulyorejo 2</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteParkandRideAriefRahmanHakim17.png" /></td><td>Halte Park and Ride Arief Rahman Hakim</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HaltePENS18.png" /></td><td>Halte PENS</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HaltePENS119.png" /></td><td>Halte PENS 1</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteRSHaji120.png" /></td><td>Halte RS Haji 1</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteRSHaji221.png" /></td><td>Halte RS Haji 2</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteRSIA122.png" /></td><td>Halte RSIA 1</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteRSIA223.png" /></td><td>Halte RSIA 2</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteSamsatManyarKertoarjo24.png" /></td><td>Halte Samsat Manyar Kertoarjo</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteSemampir25.png" /></td><td>Halte Semampir</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteSemolowaru126.png" /></td><td>Halte Semolowaru 1</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteSemolowaru227.png" /></td><td>Halte Semolowaru 2</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteSentraUKMMerr28.png" /></td><td>Halte Sentra UKM Merr</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteSMPN1929.png" /></td><td>Halte SMPN 19</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteSuperindo30.png" /></td><td>Halte Superindo</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteUnair131.png" /></td><td>Halte Unair 1</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteUnair232.png" /></td><td>Halte Unair 2</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_HalteUniversitasKatolikDarmaCendika33.png" /></td><td>Halte Universitas Katolik Darma Cendika</td></tr><tr><td style="text-align: center;"><img src="legend/Halte_fixHalte_5_34.png" /></td><td></td></tr></table>': layer_Halte_fixHalte_5,'<img src="legend/JaringanJalan_4.png" /> Jaringan Jalan': layer_JaringanJalan_4,'Bangunan_Intersect<br /><table><tr><td style="text-align: center;"><img src="legend/Bangunan_Intersect_3_4000.png" /></td><td>< 400</td></tr><tr><td style="text-align: center;"><img src="legend/Bangunan_Intersect_3_4008001.png" /></td><td>400 - 800</td></tr><tr><td style="text-align: center;"><img src="legend/Bangunan_Intersect_3_80012002.png" /></td><td>800 - 1200</td></tr><tr><td style="text-align: center;"><img src="legend/Bangunan_Intersect_3_12003.png" /></td><td>> 1200</td></tr></table>': layer_Bangunan_Intersect_3,'Akses_Clipped<br /><table><tr><td style="text-align: center;"><img src="legend/Akses_Clipped_2_4000.png" /></td><td>< 400</td></tr><tr><td style="text-align: center;"><img src="legend/Akses_Clipped_2_4008001.png" /></td><td>400 - 800</td></tr><tr><td style="text-align: center;"><img src="legend/Akses_Clipped_2_80012002.png" /></td><td>800 _ 1200</td></tr><tr><td style="text-align: center;"><img src="legend/Akses_Clipped_2_12003.png" /></td><td>> 1200</td></tr></table>': layer_Akses_Clipped_2,'Batas Admin — Batas admin<br /><table><tr><td style="text-align: center;"><img src="legend/BatasAdminBatasadmin_1_KecamatanMulyorejo0.png" /></td><td>Kecamatan Mulyorejo</td></tr><tr><td style="text-align: center;"><img src="legend/BatasAdminBatasadmin_1_KecamatanSukolilo1.png" /></td><td>Kecamatan Sukolilo</td></tr></table>': layer_BatasAdminBatasadmin_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
